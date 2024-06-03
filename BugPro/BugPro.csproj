@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="..\BugPro\BugPro.csproj" />
+    <PackageReference Include="Stateless" Version="5.15.0" />
   </ItemGroup>
 
 </Project>
