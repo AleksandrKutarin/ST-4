@@ -11,17 +11,21 @@ public class Bug
         sm = new StateMachine<State, Trigger>(state);
         sm.Configure(State.Open)
               .Permit(Trigger.Assign, State.Assigned)
-              .Permit(Trigger.Feach, State.Feached);
+              .Permit(Trigger.Feach, State.Feached)
+              .Permit(Trigger.Close, State.Closed)
+              .Permit(Trigger.Defer, State.Defered);
         sm.Configure(State.Assigned)
               .Permit(Trigger.Close, State.Closed)
               .Permit(Trigger.Defer, State.Defered)
               .Permit(Trigger.Feach, State.Feached)
               .Ignore(Trigger.Assign);
         sm.Configure(State.Closed)
-              .Permit(Trigger.Assign, State.Assigned);
-        sm.Configure(State.Defered)
               .Permit(Trigger.Assign, State.Assigned)
               .Permit(Trigger.Feach, State.Feached);
+        sm.Configure(State.Defered)
+              .Permit(Trigger.Assign, State.Assigned)
+              .Permit(Trigger.Feach, State.Feached)
+              .Permit(Trigger.Close, State.Closed);
     }
     public void Close()
     {
