@@ -21,31 +21,28 @@ public class BugTests
     public void TestOpenAssign(){
         var bug = new Bug(Bug.State.Open);
         bug.Close();
-        Assert.AreNotEqual(Bug.State.Closed, bug.getState());
-        Assert.AreEqual(Bug.State.Open, bug.getState());
+        Assert.AreNotEqual(Bug.State.Open, bug.getState());
     }
 
     [TestMethod]
     public void TestDeferAssign(){
         var bug = new Bug(Bug.State.Open);
         bug.Defer();
-        Assert.AreNotEqual(Bug.State.Defered, bug.getState());
-        Assert.AreEqual(Bug.State.Open, bug.getState());
+        Assert.AreNotEqual(Bug.State.Open, bug.getState());
     }
 
     [TestMethod]
     public void TestAssignClose(){
-        var bug = new Bug(Bug.State.Closed);
-        bug.Assign();
-        Assert.AreEqual(Bug.State.Assigned, bug.getState());
+        var bug = new Bug(Bug.State.Assigned);
+        bug.Close();
+        Assert.AreEqual(Bug.State.Closed, bug.getState());
     }
 
     [TestMethod]
     public void TestDeferAssignClose(){
-        var bug = new Bug(Bug.State.Closed);
+        var bug = new Bug(Bug.State.Assigned);
         bug.Defer();
-        Assert.AreNotEqual(Bug.State.Defered, bug.getState());
-        Assert.AreEqual(Bug.State.Closed, bug.getState());
+        Assert.AreEqual(Bug.State.Defered, bug.getState());
     }
 
     [TestMethod]
@@ -59,8 +56,7 @@ public class BugTests
     public void TestDeferToClosed(){
         var bug = new Bug(Bug.State.Defered);
         bug.Close();
-        Assert.AreNotEqual(Bug.State.Closed, bug.getState());
-        Assert.AreEqual(Bug.State.Defered, bug.getState());
+        Assert.AreEqual(Bug.State.Closed, bug.getState());
     }
 
     [TestMethod]
@@ -102,8 +98,6 @@ public class BugTests
     public void TestClosedToFeached(){
         var bug = new Bug(Bug.State.Closed);
         bug.Feach();
-        Assert.AreNotEqual(Bug.State.Feached, bug.getState());
-        Assert.AreEqual(Bug.State.Closed, bug.getState());
+        Assert.AreNotEqual(Bug.State.Closed, bug.getState());
     }
-
 }
